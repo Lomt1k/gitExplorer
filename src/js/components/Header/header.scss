@@ -1,0 +1,15 @@
+.header {
+  &__wrapper {
+    padding: 10px 0 40px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__logo {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 600;
+    user-select: none;
+  }
+}
