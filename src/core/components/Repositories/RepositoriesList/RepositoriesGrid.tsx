@@ -1,7 +1,9 @@
+import "./_repositories-grid.scss";
 import { observer } from "mobx-react-lite";
 import RootStore from "../../../store/RootStore";
 import RepositoryCard from "../RepositoryCard/RepositoryCard";
-import "./_repositories-grid.scss";
+import RepositoryLoadingCards from "../RepositoryLoadingCards/RepositoryLoadingCards";
+import LoadRepositoriesOnScroll from "../LoadRepositoriesOnScroll/LoadRepositoriesOnScroll";
 
 const RepositoriesGrid = observer(() => {
 
@@ -14,6 +16,11 @@ const RepositoriesGrid = observer(() => {
           </li>
         )
       })}
+      {RootStore.repoStore.isLoading &&
+        <RepositoryLoadingCards count={12}/>
+      }
+      {!RootStore.repoStore.isLoading && 
+        <LoadRepositoriesOnScroll scrollPercentage={60} />}
     </ul>
   )
 })

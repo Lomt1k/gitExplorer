@@ -6,6 +6,10 @@ const GitSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async(searchText: string) => {
+    if (searchText.length < 1) {
+      return;
+    }
+    
     setIsLoading(true);
     await GithubAPI.fetchRepos(searchText);
     setIsLoading(false);

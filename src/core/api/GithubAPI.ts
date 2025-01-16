@@ -1,18 +1,34 @@
 import RootStore from "../store/RootStore";
+import { isRepoResponse } from "./GithubTypes";
 
 class GithubAPI {
   private _baseUrl: string = 'https://api.github.com/search/repositories?';
+  private _itemsPerPage = 30;
+  private _lastPage: number = 0;
+  private _lastSearchParams: URLSearchParams | null = null;
+  private _isNextPageAvailable: boolean = false;
 
   public async fetchRepos(searchText: string) {
-    const searchParams = new URLSearchParams({
-      q: searchText
+    // если вдруг подгрузка уже идёт
+    if (RootStore.repoStore.isLoading) {
+      return;
+    }
+
+    this._lastPage = 1;
+    this._lastSearchParams = new URLSearchParams({
+      q: searchText,
+      sort: 'stars',
+      page: this._lastPage.toString()
     });
 
     try {
-      const response = await fetch(this._baseUrl + searchParams);
+      this._isNextPageAvailable = false;
+      RootStore.repoStore.setRepos([], true);
+      const response = await fetch(this._baseUrl + this._lastSearchParams);
       const data = await response.json();
       if (isRepoResponse(data)) {
-        RootStore.repoStore.setRepos(data.items);
+        RootStore.repoStore.setRepos(data.items, false);
+        this._isNextPageAvailable = data.items.length >= this._itemsPerPage;
         return;
       }
     }
@@ -21,41 +37,45 @@ class GithubAPI {
     }
 
     console.error('Произошла ошибка при попытке получить репозитории из API');
-    RootStore.repoStore.setRepos([]);
+    RootStore.repoStore.setRepos([], false);
+  }
+
+  public async tryFetchNextPage() {
+    // если вдруг еще не делали запрос первой страницы
+    if (this._lastSearchParams == null) {
+      return;
+    }
+
+    // если уже идёт подгрузка или уже загружены все страницы
+    if (RootStore.repoStore.isLoading || !this._isNextPageAvailable) {
+      return;
+    }
+
+    const nextSearchParams = new URLSearchParams({
+      q: this._lastSearchParams.get('q')!,
+      sort: this._lastSearchParams.get('sort')!,
+      page: `${this._lastPage + 1}`
+    });
+    
+    try {
+      RootStore.repoStore.setLoadingState(true);
+      const response = await fetch(this._baseUrl + nextSearchParams);
+      const data = await response.json();
+      if (isRepoResponse(data)) {
+        this._isNextPageAvailable = data.items.length >= this._itemsPerPage;
+        RootStore.repoStore.addRepos(data.items);
+        this._lastSearchParams = nextSearchParams;
+        this._lastPage++;
+        return;
+      }
+    }
+    catch (error) {
+      console.error(error);
+    }
+
+    console.error('Произошла ошибка при попытке догрузить список репозиториев из API');
+    RootStore.repoStore.setLoadingState(false);
   }
 }
 
-type RepoResponse = {
-  total_count: number;
-  incomplete_results: boolean;
-  items: RepositoryData[];
-}
-
-function isRepoResponse(obj: any): obj is RepoResponse {
-  return typeof obj.total_count === 'number'
-    && typeof obj.incomplete_results === 'boolean'
-    && obj.items instanceof Array && (obj.items.length < 1 || isRepositoryData(obj.items[0]));
-}
-
-type RepositoryData = {
-  id: number;
-  name: string;
-  description: string;
-  html_url: string;
-  created_at: string;
-  forks: number;
-  stargazers_count: number;
-}
-
-function isRepositoryData(obj: any): obj is RepositoryData {
-  return typeof obj.id === 'number'
-    && typeof obj.name === 'string'
-    && typeof obj.description === 'string'
-    && typeof obj.html_url === 'string'
-    && typeof obj.created_at === 'string'
-    && typeof obj.forks === 'number'
-    && typeof obj.stargazers_count === 'number';
-}
-
 export default new GithubAPI();
-export type { RepositoryData };
