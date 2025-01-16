@@ -1,9 +1,8 @@
 import { Input } from "antd";
 import { useState } from "react";
-import { observer } from "mobx-react-lite";
 import GithubAPI from "../../api/GithubAPI";
 
-const GitSearch = observer(() => {
+const GitSearch = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSearch = async(searchText: string) => {
@@ -13,6 +12,6 @@ const GitSearch = observer(() => {
   }
 
   return <Input.Search placeholder="Что будем искать?" enterButton="Искать" size="large" loading={isLoading} onSearch={(e) => handleSearch(e)}/>
-})
+}
 
 export default GitSearch;

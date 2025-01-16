@@ -12,7 +12,7 @@ class GithubAPI {
       const response = await fetch(this._baseUrl + searchParams);
       const data = await response.json();
       if (isRepoResponse(data)) {
-        RootStore.repoStore.addRepos(data.items);
+        RootStore.repoStore.setRepos(data.items);
         return;
       }
     }

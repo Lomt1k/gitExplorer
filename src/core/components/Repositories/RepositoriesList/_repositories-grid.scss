@@ -1,0 +1,12 @@
+@use "/src/styles" as *;
+
+.repositories-grid {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  justify-content: stretch;
+  align-items: stretch;
+}

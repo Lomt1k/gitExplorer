@@ -2,20 +2,18 @@ import { makeAutoObservable } from "mobx";
 import { RepositoryData } from "../api/GithubAPI";
 
 class RepoStore {
-  repos: RepositoryData[] = [];
+  datas: RepositoryData[] = [];
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  addRepos(newRepos: RepositoryData[]) {
-    console.log('addRepos', newRepos);
-    this.repos = [...this.repos, ...newRepos];
+  addRepos(newDatas: RepositoryData[]) {
+    this.datas = [...this.datas, ...newDatas];
   }
 
-  setRepos(newRepos: RepositoryData[]) {
-    console.log('setRepos', newRepos);
-    this.repos = newRepos;
+  setRepos(newDatas: RepositoryData[]) {
+    this.datas = newDatas;
   }
 }
 
