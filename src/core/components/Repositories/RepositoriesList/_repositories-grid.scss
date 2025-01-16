@@ -7,8 +7,6 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
-  justify-content: stretch;
-  align-items: stretch;
 
   @include vp-1023 {
     grid-template-columns: repeat(3, 1fr);
