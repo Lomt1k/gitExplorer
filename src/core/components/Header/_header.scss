@@ -1,3 +1,5 @@
+@use "/src/styles" as *;
+
 .header {
   &__wrapper {
     padding: 10px 0 40px;
@@ -7,6 +9,7 @@
   }
 
   &__logo {
+    font-family: $ff-main;
     font-size: 20px;
     line-height: 24px;
     font-weight: 600;

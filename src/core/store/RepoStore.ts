@@ -1,5 +1,5 @@
 import { makeAutoObservable } from "mobx";
-import { RepositoryData } from "../GithubAPI";
+import { RepositoryData } from "../api/GithubAPI";
 
 class RepoStore {
   repos: RepositoryData[] = [];

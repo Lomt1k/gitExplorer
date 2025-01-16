@@ -1,4 +1,4 @@
-import RootStore from "./store/RootStore";
+import RootStore from "../store/RootStore";
 
 class GithubAPI {
   private _baseUrl: string = 'https://api.github.com/search/repositories?';

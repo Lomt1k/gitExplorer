@@ -1,7 +1,7 @@
 import { Input } from "antd";
 import { useState } from "react";
 import { observer } from "mobx-react-lite";
-import GithubAPI from "../../GithubAPI";
+import GithubAPI from "../../api/GithubAPI";
 
 const GitSearch = observer(() => {
   const [isLoading, setIsLoading] = useState(false);

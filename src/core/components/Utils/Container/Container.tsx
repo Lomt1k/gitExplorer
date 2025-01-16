@@ -1,3 +1,5 @@
+import "./_container.scss";
+
 type ContainerProps = {
   children: string | JSX.Element | JSX.Element[]
 }

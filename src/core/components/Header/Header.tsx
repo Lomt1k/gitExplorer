@@ -1,5 +1,5 @@
-import "./header.scss";
-import Container from "../Utils/Container";
+import "./_header.scss";
+import Container from "../Utils/Container/Container";
 import GitSearch from "../GitSearch/GitSearch";
 
 const Header = () => {
