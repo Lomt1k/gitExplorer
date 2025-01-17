@@ -4,6 +4,7 @@ import { RepositoryData } from "../api/GithubTypes";
 class RepoStore {
   datas: RepositoryData[] = [];
   isLoading: boolean = false;
+  hasBeenLoadings: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -11,16 +12,17 @@ class RepoStore {
 
   addRepos(newDatas: RepositoryData[]) {
     this.datas = [...this.datas, ...newDatas];
-    this.isLoading = false;
+    this.setLoadingState(false);
   }
 
   setRepos(newDatas: RepositoryData[], isLoading: boolean) {
     this.datas = newDatas;
-    this.isLoading = isLoading;
+    this.setLoadingState(isLoading);
   }
 
   setLoadingState(state: boolean) {
     this.isLoading = state;
+    this.hasBeenLoadings = state ? true : this.hasBeenLoadings;
   }
 }
 
