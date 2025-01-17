@@ -4,12 +4,15 @@ import GitSearch from "../GitSearch/GitSearch";
 
 const Header = () => {
   return (
-    <Container>
-      <div className="header__wrapper">
-        <span className="header__logo">gitExplorer</span>
-        <GitSearch/>
-      </div>
-    </Container>
+    <header className="header">
+      <Container>
+        <div className="header__wrapper">
+          <span className="header__logo">gitExplorer</span>
+          <GitSearch />
+        </div>
+      </Container>
+    </header>
+
   )
 }
 
