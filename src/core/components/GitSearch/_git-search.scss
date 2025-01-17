@@ -1,0 +1,29 @@
+@use "/src/styles" as *;
+
+.git-search {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 500px) {
+    flex-direction: column;
+  }
+
+  @include vp-767 {
+    gap: 10px;
+  }
+
+  &__sort {
+    width: 250px;
+    height: 35px;
+
+    @include vp-767 {
+      width: 200px;
+    }
+
+    @media (max-width: 500px) {
+      width: 100%;
+    }
+  }
+}

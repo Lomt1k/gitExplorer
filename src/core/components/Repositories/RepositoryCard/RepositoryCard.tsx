@@ -56,7 +56,7 @@ const RepositoryCard = ({ data }: RepositoryCardProps) => {
         ]}
       >
         <Typography.Text className="repository-card__text">
-          {getShortDescription(data.description)}
+          {data.description ? getShortDescription(data.description) : 'Описание отсутствует'}
         </Typography.Text>
       </Card>
       {showModal && <EditRepositoryModal data={data} close={() => setShowModal(false)} />}

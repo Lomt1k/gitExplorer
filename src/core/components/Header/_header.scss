@@ -14,5 +14,9 @@
     line-height: 24px;
     font-weight: 600;
     user-select: none;
+
+    @include vp-767 {
+      display: none;
+    }
   }
 }

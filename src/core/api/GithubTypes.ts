@@ -1,3 +1,11 @@
+export type ErrorMessageResponse = {
+  message: string;
+}
+
+export function isErrorMessageResponse(obj: any): obj is ErrorMessageResponse {
+  return typeof obj.message === 'string';
+}
+
 export type RepoResponse = {
   total_count: number;
   incomplete_results: boolean;
@@ -13,7 +21,7 @@ export function isRepoResponse(obj: any): obj is RepoResponse {
 export type RepositoryData = {
   id: number;
   name: string;
-  description: string;
+  description?: string;
   html_url: string;
   created_at: string;
   forks: number;
@@ -23,9 +31,15 @@ export type RepositoryData = {
 export function isRepositoryData(obj: any): obj is RepositoryData {
   return typeof obj.id === 'number'
     && typeof obj.name === 'string'
-    && typeof obj.description === 'string'
     && typeof obj.html_url === 'string'
     && typeof obj.created_at === 'string'
     && typeof obj.forks === 'number'
     && typeof obj.stargazers_count === 'number';
 }
+
+export enum SearchSortType {
+  Stars = 'stars',
+  Forks = 'forks',
+  HelpWantedIssues = 'help-wanted-issues',
+  Updated = 'updated',
+};
