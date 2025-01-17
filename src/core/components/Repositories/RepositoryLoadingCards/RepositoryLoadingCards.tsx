@@ -1,4 +1,4 @@
-import { Card } from "antd";
+import { Card, Col } from "antd";
 
 type RepositoryLoadingCardsProps = {
   count: number;
@@ -9,9 +9,9 @@ const RepositoryLoadingCards = ({count}: RepositoryLoadingCardsProps) => {
 
   for (let i = 0; i < count; i++) {
     elements.push(
-      <li key={i}>
+      <Col key={`loading-card-${i}`} span={6} xs={24} sm={12} md={8} lg={6} xl={6} xxl={6}>
         <Card loading={true} style={{height: "100%"}}/>
-      </li>
+      </Col>
     )
   }
 

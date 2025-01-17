@@ -15,7 +15,7 @@ const GitSearch = () => {
     setIsLoading(false);
   }
 
-  return <Input.Search placeholder="Что будем искать?" enterButton="Искать" size="large" loading={isLoading} onSearch={(e) => handleSearch(e)}/>
+  return <Input.Search placeholder="Что будем искать?" enterButton="Искать" size="large" autoFocus loading={isLoading} onSearch={(e) => handleSearch(e)}/>
 }
 
 export default GitSearch;
