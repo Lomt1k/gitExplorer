@@ -24,6 +24,14 @@ class RepoStore {
     this.isLoading = state;
     this.hasBeenLoadings = state ? true : this.hasBeenLoadings;
   }
+
+  replace(id: number, newData: RepositoryData) {
+    this.datas = this.datas.map(data => data.id === id ? newData : data);
+  }
+
+  remove(id: number) {
+    this.datas = this.datas.filter(e => e.id !== id);
+  }
 }
 
 export default RepoStore;
