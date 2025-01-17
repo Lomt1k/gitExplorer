@@ -1,5 +1,5 @@
-import bycicleIcon from '../../../../assets/bycicle.svg';
-import sadCatIcon from '../../../../assets/sad-cat.svg';
+import bycicleIcon from '../../../../assets/images/bycicle.svg';
+import sadCatIcon from '../../../../assets/images/sad-cat.svg';
 import RootStore from "../../../store/RootStore";
 import RepositoryCard from "../RepositoryCard/RepositoryCard";
 import RepositoryLoadingCards from "../RepositoryLoadingCards/RepositoryLoadingCards";

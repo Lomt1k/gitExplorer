@@ -2,4 +2,21 @@
 
 .repository-card {
   height: 100%;
+
+  .ant-card-head-wrapper {
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  &__title {
+    display: flex;
+    align-items: center;
+  }
+
+  &__extra {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
 }
