@@ -1,5 +1,5 @@
 import RootStore from "../../../store/RootStore";
-import { Input, InputNumber, Modal, Typography } from "antd";
+import { Input, InputNumber, message, Modal, Typography } from "antd";
 import { RepositoryData, isRepositoryData } from "../../../api/GithubTypes";
 
 type EditRepositoryModalProps = {
@@ -10,7 +10,9 @@ type EditRepositoryModalProps = {
 const EditRepositoryModal = ({ data, close }: EditRepositoryModalProps) => {
   const newData = JSON.parse(JSON.stringify(data));
   if (!isRepositoryData(newData)) {
-    console.error('Произошла ошибка при копировании объекта RepositoryData');
+    const messageText = 'Произошла ошибка при копировании объекта RepositoryData';
+    console.error(messageText);
+    message.error(messageText, 5);
     return <></>;
   }
 

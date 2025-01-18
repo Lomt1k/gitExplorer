@@ -1,4 +1,5 @@
 import RootStore from "../store/RootStore";
+import { message } from "antd";
 import { isErrorMessageResponse, isRepoResponse, SearchSortType } from "./GithubTypes";
 
 class GithubAPI {
@@ -39,6 +40,9 @@ class GithubAPI {
     }
     catch (error) {
       console.error(error);
+      if (error instanceof Error) {
+        message.error(error.message, 5);
+      }
       RootStore.repoStore.setLoadingState(false);
     }
   }
@@ -79,6 +83,9 @@ class GithubAPI {
     }
     catch (error) {
       console.error(error);
+      if (error instanceof Error) {
+        message.error(error.message, 5);
+      }
       RootStore.repoStore.setLoadingState(false);
     }
   }
