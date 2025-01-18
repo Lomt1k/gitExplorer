@@ -6,7 +6,15 @@ type LoadRepositoriesOnScrollProps = {
   scrollPercentage: number;
 }
 
+let lastRequestTime = 0;
+
 function TryLoadNextPage() {
+  const now = Date.now();
+  if (now - lastRequestTime < 1_000) {
+    return;
+  }
+
+  lastRequestTime = now;
   GithubAPI.tryFetchNextPage();
 }
 
