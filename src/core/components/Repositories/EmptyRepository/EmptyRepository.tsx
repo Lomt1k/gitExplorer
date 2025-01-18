@@ -16,7 +16,7 @@ const EmptyRepository = observer(({title, text, imageUrl, imageAlt}: EmptyReposi
       <Typography.Title className="empty-repository__title" level={2}>
         {title}
       </Typography.Title>
-      <Typography.Text className="empty-repository__text" type={'secondary'}>
+      <Typography.Text className="empty-repository__text" type={'secondary'} strong>
         {text}
       </Typography.Text>
     </div>

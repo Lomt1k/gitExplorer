@@ -30,7 +30,7 @@ const EditRepositoryModal = ({ data, close }: EditRepositoryModalProps) => {
   }
 
   return (
-    <Modal open={true} title={`Редактирование данных (id ${data.id})`} onOk={handleOk} onCancel={handleCancel}>
+    <Modal open={true} title={`Редактирование данных (id ${data.id})`} okText="Сохранить" cancelText="Отменить" onOk={handleOk} onCancel={handleCancel}>
       <div style={{ marginBottom: '10px' }}>
         <Typography.Text>Название репозитория</Typography.Text>
         <Input placeholder="Введите название" defaultValue={data.name} autoFocus
@@ -38,7 +38,7 @@ const EditRepositoryModal = ({ data, close }: EditRepositoryModalProps) => {
       </div>
       <div style={{ marginBottom: '10px' }}>
         <Typography.Text>Описание репозитория</Typography.Text>
-        <Input.TextArea placeholder="Введите описание" defaultValue={data.description}
+        <Input.TextArea placeholder="Введите описание" defaultValue={data.description} style={{ height: 100, resize: 'none' }}
           onChange={(e) => handleInputChange('description', e.target.value)} />
       </div>
       <div style={{ marginBottom: '20px' }}>

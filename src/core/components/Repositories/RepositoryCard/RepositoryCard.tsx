@@ -43,14 +43,14 @@ const RepositoryCard = ({ data }: RepositoryCardProps) => {
           </div>}
         actions={[
           <a href={data.html_url} target='_blank'>
-            <Button type="text">
+            <Button>
               <IconLink width={20} height={20} key="link" />
             </Button>
           </a>,
-          <Button type="text" onClick={handleEditClick}>
+          <Button onClick={handleEditClick}>
             <IconEdit width={20} height={20} key="edit" />
           </Button>,
-          <Button type="text" onClick={handleHideClick}>
+          <Button onClick={handleHideClick}>
             <IconHide width={24} height={24} key="hide" />
           </Button>,
         ]}
