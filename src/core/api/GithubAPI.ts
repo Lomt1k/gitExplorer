@@ -39,7 +39,7 @@ class GithubAPI {
     }
     catch (error) {
       console.error(error);
-      RootStore.repoStore.setRepos([], false);
+      RootStore.repoStore.setLoadingState(false);
     }
   }
 

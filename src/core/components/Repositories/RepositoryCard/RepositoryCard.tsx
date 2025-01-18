@@ -2,6 +2,7 @@ import "./_repository-card.scss";
 import { Button, Card, Typography } from "antd";
 import { RepositoryData } from "../../../api/GithubTypes";
 import { useState } from "react";
+import React from "react";
 import IconStar from "../../Icons/IconStar";
 import IconLink from "../../Icons/IconLink";
 import IconEdit from "../../Icons/IconEdit";
@@ -25,7 +26,6 @@ const RepositoryCard = ({ data }: RepositoryCardProps) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleEditClick = () => {
-    console.log('setShowModal');
     setShowModal(true);
   }
 
@@ -65,4 +65,4 @@ const RepositoryCard = ({ data }: RepositoryCardProps) => {
   )
 }
 
-export default RepositoryCard;
+export default React.memo(RepositoryCard);
