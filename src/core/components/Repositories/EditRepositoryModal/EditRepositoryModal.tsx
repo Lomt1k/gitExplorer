@@ -1,6 +1,7 @@
 import RootStore from "../../../store/RootStore";
-import { Input, InputNumber, message, Modal, Typography } from "antd";
-import { RepositoryData, isRepositoryData } from "../../../api/GithubTypes";
+import { Input, InputNumber, Modal, Typography } from "antd";
+import { RepositoryData } from "../../../api/GithubTypes";
+import { useRef } from "react";
 
 type EditRepositoryModalProps = {
   data: RepositoryData;
@@ -8,20 +9,14 @@ type EditRepositoryModalProps = {
 }
 
 const EditRepositoryModal = ({ data, close }: EditRepositoryModalProps) => {
-  const newData = JSON.parse(JSON.stringify(data));
-  if (!isRepositoryData(newData)) {
-    const messageText = 'Произошла ошибка при копировании объекта RepositoryData';
-    console.error(messageText);
-    message.error(messageText, 5);
-    return <></>;
-  }
+  const newData = useRef({...data});
 
   const handleInputChange = <K extends keyof RepositoryData>(key: K, value: RepositoryData[K]) => {
-    newData[key] = value;
+    newData.current[key] = value;
   }
 
   const handleOk = () => {
-    RootStore.repoStore.replace(data.id, newData);
+    RootStore.repoStore.replace(data.id, newData.current);
     close();
   }
 
